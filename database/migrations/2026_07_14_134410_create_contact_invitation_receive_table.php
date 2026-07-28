@@ -19,6 +19,8 @@ return new class extends Migration
                 $table->unique(['contact_id', 'invitation_id']);
 
             $table->string('mode', 50)->nullable();
+            $table->timestamp('sent_at')->nullable();
+
             //$table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->unique(['start_date', 'title']);
 
             $table->string('description');
-
+            $table->string('location');
             $table->text('program_document')->nullable();
             $table->string('access_type', 50)->nullable();
             $table->string('reference_secretariat', 150)->nullable();

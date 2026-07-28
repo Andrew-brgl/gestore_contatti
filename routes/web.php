@@ -10,9 +10,3 @@ Route::get('/', function () {
     return view('home');
 });
 
-//Route group for contact
-Route::group(['prefix' => 'contact'], function () {
-    
-    Route::get('/prova', [ContactController::class, 'prova']);
-    Route::apiResource('/', ContactController::class);
-});

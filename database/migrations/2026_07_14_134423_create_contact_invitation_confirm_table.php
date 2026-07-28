@@ -19,9 +19,9 @@ return new class extends Migration
 
             $table->integer('attending_guests')->default(0)->nullable();
             $table->integer('confirmed_guests')->default(0)->nullable();
-            $table->date('confirmation_date')->nullable();
-            $table->date('cancellation_date')->nullable();
-            $table->boolean('has_attended')->default(true)->nullable();
+            $table->dateTime('confirmation_date')->nullable();
+            $table->dateTime('cancellation_date')->nullable();
+            $table->boolean('has_attended')->default(false)->nullable();
             //$table->timestamps();
         });
     }

@@ -2,68 +2,74 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(StoreContactRequest $request): JsonResponse
     {
-        //
+        $contact = Contact::create($request->validated());
+
+        return response()->json($contact, 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getContact(int $id): JsonResponse
     {
-        //
+        $contact = Contact::findOrFail($id);
+
+        return response()->json($contact);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function invalidate(int $id): JsonResponse
     {
-        //
+        $contact = Contact::findOrFail($id);
+        $contact->update(['valid_unitil' => today()->toDateString()]);
+
+        return response()->json($contact);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function updateContact(Request $request)
     {
-        //
+        $id = Request()->id;
+        $contact = Contact::find($id);
+        if (! $contact) {
+            return response()->json(['message' => 'Contact not found'], 404);
+        }
+
+        // Update only specific fields
+        $contact->update($request->only(['name', 'email', 'phone']));
+
+        return response()->json($contact);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function searchContacts(Request $request)
     {
-        //
+        $query = Contact::query();
+
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%'.$request->input('name').'%');
+        }
+
+        if ($request->has('email')) {
+            $query->where('email', 'like', '%'.$request->input('email').'%');
+        }
+
+        if ($request->has('phone')) {
+            $query->where('phone', 'like', '%'.$request->input('phone').'%');
+        }
+
+        $contacts = $query->get();
+
+        return response()->json($contacts);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function getAllContacts()
     {
-        //
-    }
+        $contacts = Contact::all();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        
-    }
-
-    public function prova(){
-        return 'ciaoooo';
+        return response()->json($contacts);
     }
 }

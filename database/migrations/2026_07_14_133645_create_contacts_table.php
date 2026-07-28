@@ -31,13 +31,13 @@ return new class extends Migration
             $table->date('valid_unitil')->nullable();
             $table->string('website')->nullable();
             $table->text('notes')->nullable();
-            $table->string('department', 150)->nullable();
             $table->timestamps();
             
-            //FK on roles, categories e titles
+            //FK on roles, categories, titles e departments
             $table->foreignId('role_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('category_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('title_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
         });
     }
 
