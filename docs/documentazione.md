@@ -18,7 +18,7 @@ Il sistema deve permettere di memorizzare e gestire le informazioni
 relative ai contatti, eventi e gli inviti dei vari contatti agli eventi.
 
  - un contatto può essere invitato ad un evento come ospite speciale (ovvero le persone che saliranno sul palco a parlare) oppure come semplice invitato
- - un semplice invitato una volta ricevuto l'invito puo decidere se: confermare e venire di persona, delegare un' altra persona, confermare a nome di un intero gruppo ed in questo caso deve specificare il numero di persone che verranno all'evento
+ - un semplice invitato una volta ricevuto l'invito puo decidere se: confermare e venire di persona, delegare un' altra persona oppure confermare a nome di un intero gruppo ed in questo caso deve specificare il numero di persone che verranno all'evento
  - bisogna poter tenere traccia di quante volte un invitato abbia accettato l'invito e di quante volte si sia effettivamente presentato all'evento
 
 
